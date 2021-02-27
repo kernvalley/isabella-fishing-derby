@@ -1,7 +1,7 @@
 ---
 author: Chris Zuber
 title: Isabella Lake Fishing Derby
-url: https://musing-hodgkin-b437a7.netlify.app
+url: https://derby.kernvalley.us
 markdown: kramdown
 version: 1.3.0
 timezone: America/Los_Angeles
@@ -18,22 +18,15 @@ tiles-config: /browserconfig.xml
 service_worker: /service-worker.js
 og-type: website
 keep-kern-clean: true
-description: "A template repository for Jekyll sites, including skeleton JS, CSS, SVGs, fonts, etc."
+description: "A PWA and TWA for the Isabella Lake Fishing Derby"
 mobile-web-app-capable: true
-canonical: https://musing-hodgkin-b437a7.netlify.app
+canonical: https://derby.kernvalley.us
 keywords:
-  - jekyll
-  - static
-  - template
-  - github
-  - CSS3
-  - HTML5
-  - responsive design
-  - progressive web app
-  - pwa
-  - ecmascript
-  - javascript
-  - es6
+  - isabella lake
+  - fishing derby
+  - kern valley
+  - kern river valley
+  - lake isabella
 repository:
   username: kernvalley
   project: isabella-fishing-derby
