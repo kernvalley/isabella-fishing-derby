@@ -12,3 +12,9 @@
 #install-btn > svg {
 	margin-bottom: 10px;
 }
+
+@media (max-width: 450px) {
+	.nav-link-label {
+		display: none;
+	}
+}

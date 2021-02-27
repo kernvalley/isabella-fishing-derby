@@ -27,3 +27,7 @@ x,img/octicons/x.svg
 apps,img/apps.svg
 address-book,img/adwaita-icons/mimetypes/x-office-address-book.svg
 calendar,img/octicons/calendar.svg
+map,img/map.svg
+store,img/store.svg
+x-office-document,img/adwaita-icons/mimetypes/x-office-document.svg
+cloud-upload,img/octicons/cloud-upload.svg

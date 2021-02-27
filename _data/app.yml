@@ -1,14 +1,14 @@
-name: Jekyll Template
-shortName: Jekyll Template
+name: Isabella Lake Fishing Derby
+shortName: Fishing Derby
 version: 1.3.0
 lang: en
 dir: ltr
 display: standalone
 orientation: any
-description: "A GitHub repository for easily creating fast, modern, PWA compatible websites"
+description: The 2021 Isabella Lake Fishing Derby is set for April 24, 2021 thru September 6, 2021
 icons-file: /img/icons.svg
 theme:
-  color: '#007bff'
+  color: '#008000'
   background: '#242424'
 icons:
   - src: /img/favicon.svg
@@ -48,89 +48,103 @@ screenshots:
     type: image/png
 # https://web.dev/app-shortcuts/
 shortcuts:
-  - name: Bacon Ipsum
-    description: Test article and shortcut
-    url: /posts/2019/10/29/test/
+  - name: News
+    description: News, Press Releases, and blog posts for the Isabella Lake Fishing Derby
+    url: /news/
     icons:
-    - src: /img/post.svg
-      sizes: 192x192
-      type: image/svg+xml
-    - src: /img/post-192.png
-      sizes: 192x192
-      type: image/png
-    - src: /img/post-144.png
-      sizes: 144x144
-      type: image/png
-    - src: /img/post-96.png
-      sizes: 96x96
-      type: image/png
-    - src: /img/post-72.png
-      sizes: 72x72
-      type: image/png
-    - src: /img/post-48.png
-      sizes: 48x48
-      type: image/png
-    - src: /img/post-36.png
-      sizes: 36x36
-      type: image/png
-  - name: CHANGELOG
-    description: List of recent changes
-    url: /changelog/
+      - src: /img/shortcuts/news-192.png
+        sizes: 192x192
+        type: image/png
+      - src: /img/shortcuts/news-144.png
+        sizes: 144x144
+        type: image/png
+      - src: /img/shortcuts/news-96.png
+        sizes: 96x96
+        type: image/png
+      - src: /img/shortcuts/news-72.png
+        sizes: 72x72
+        type: image/png
+      - src: /img/shortcuts/news-48.png
+        sizes: 48x48
+        type: image/png
+      - src: /img/shortcuts/news-36.png
+        sizes: 36x36
+        type: image/png
+  - name: Map
+    description: Map of local businesses and points-of-interest for the Isabella Lake Fishing Derby
+    url: /map/
     icons:
-    - src: /img/changelog.svg
-      sizes: 192x192
-      type: image/svg+xml
-    - src: /img/changelog-192.png
-      sizes: 192x192
-      type: image/png
-    - src: /img/changelog-144.png
-      sizes: 144x144
-      type: image/png
-    - src: /img/changelog-96.png
-      sizes: 96x96
-      type: image/png
-    - src: /img/changelog-72.png
-      sizes: 72x72
-      type: image/png
-    - src: /img/changelog-48.png
-      sizes: 48x48
-      type: image/png
-    - src: /img/changelog-36.png
-      sizes: 36x36
-      type: image/png
+      - src: /img/shortcuts/map-192.png
+        sizes: 192x192
+        type: image/png
+      - src: /img/shortcuts/map-144.png
+        sizes: 144x144
+        type: image/png
+      - src: /img/shortcuts/map-96.png
+        sizes: 96x96
+        type: image/png
+      - src: /img/shortcuts/map-72.png
+        sizes: 72x72
+        type: image/png
+      - src: /img/shortcuts/map-48.png
+        sizes: 48x48
+        type: image/png
+      - src: /img/shortcuts/map-36.png
+        sizes: 36x36
+        type: image/png
+  - name: Shop
+    description: Browser avaialble merchandise and memorabilia for the Isabella Lake Fishing Derby
+    url: /shop/
+    icons:
+      - src: /img/shortcuts/shop-192.png
+        sizes: 192x192
+        type: image/png
+      - src: /img/shortcuts/shop-144.png
+        sizes: 144x144
+        type: image/png
+      - src: /img/shortcuts/shop-96.png
+        sizes: 96x96
+        type: image/png
+      - src: /img/shortcuts/shop-72.png
+        sizes: 72x72
+        type: image/png
+      - src: /img/shortcuts/shop-48.png
+        sizes: 48x48
+        type: image/png
+      - src: /img/shortcuts/shop-36.png
+        sizes: 36x36
+        type: image/png
+# share_target:
+#   name: Submit Photo to IL Fishing Derby
+#   action: /submit
+#   enctype: application/x-www-form-urlencoded
+#   method: POST
+#   params:
+#     title: subject
+#     caption: body
 share_target:
-  name: Contact Page
-  action: "/contact/"
+  name: Submit Photo to IL Fishing Derby
+  action: /submit
   enctype: application/x-www-form-urlencoded
   method: GET
   params:
     title: subject
-    text: body
+    caption: body
 # iarc_rating_id:
 related_applications:
   - platform: webapp
-    url: /manifest.json
-  # - platform: play
-  #   id: "twa.weather.kernvalley"
+    url: https://derby.kernvalley.us/manifest.json/manifest.json
+  - platform: play
+    id: us.kernvalley.derby.twa
   #   url: "#"
   # - platform: itunes
   #   url: "#"
   # - platform: windows
   #   url: "#"
 features:
-  - PWA-ready GitHub template for Jekyll sites
-  - Dark mode support, controlled by (prefers-color-scheme) media query
-  - Includes templates created with SEO via structured data in mind
-  - Initial setup scores 99% on mobile on Page Speed Insights
-  - Responsive design supporting any screen size thanks to CSS grid and use of viewport units
-  - Integtation with system sharing via the Share API (with fallback)
-  - Preset Pull Request and Issue templates, as well as Code of Conduct & Contributing Guidelines
-  - Built-in testing via GitHub Actions, eslint, and stylelint
-  - Always up-to-date thanks to preset Dependabot-v2 config
-  - Setup for quick deployment to Netlify
-  - Version files for Ruby and NodeJS (.rvmrc, .ruby-version, and .nvmrc)
+  - Offline access to Map of the KRV, Shopping, Derby News, and more
+  - Submit photos for the Isabella Lake Fishing Derby Photo Contest
 # https://github.com/w3c/manifest/wiki/Categories
 categories:
-  - business
-  - productivity
-  - utilities
+  - travel
+  - lifestyle

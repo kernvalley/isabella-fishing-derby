@@ -2,6 +2,18 @@ nav:
   - label: Home
     icon: home
     href: /
+  - label: News
+    icon: x-office-document
+    href: /news/
+  - label: Map
+    icon: map
+    href: /map/
+  - label: Shop
+    icon: store
+    href: /shop/
+  - label: Submit
+    icon: cloud-upload
+    href: /submit/
 footer:
   - label: KernValley.US
     href: https://kernvalley.us

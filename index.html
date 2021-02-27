@@ -1,15 +1,22 @@
 ---
+# Due to Jekyll's pagination, news page MUST be index.html
 layout: default
-title: Home
+title: News
 pinned: true
-description: A GitHub repository for easily creating fast, modern, PWA compatible websites
+permalink: /news/
+description: News, Press Releases, and blog posts for the Isabella Lake Fishing Derby
 tags:
-- jekyll
-- pwa
-- github template repo
-prerender:
-- href: /posts/2019/10/29/test/
+  - events
+  - lake isabella
+  - isabella lake
+  - fishing derby
+  - kern valley
+  - kern river valley
+  - news
+  - blog
+  - press releases
 ---
+<div class="status-box info">Press releases, Derby News articles, and maybe some sponsored content.</div><br />
 <section class="pagination">
 	<div class="grid grid-gallery">
 		{% for post in paginator.posts %}

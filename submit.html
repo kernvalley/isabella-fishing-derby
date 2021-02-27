@@ -1,0 +1,84 @@
+---
+layout: default
+title: Submit
+permalink: /submit/
+pinned: true
+index: true
+#no-header: true
+referrer: no-referrer
+description: Submit a photo for the Isabella Lake Fishing Derby Photo Contest
+scripts:
+  - href: https://cdn.kernvalley.us/components/share-target.js
+    crossOrigin: anonymous
+    referrerPolicy: no-referrer
+    async: true
+    defer: true
+tags:
+  - events
+  - lake isabella
+  - isabella lake
+  - fishing derby
+  - kern valley
+  - kern river valley
+  - photo
+  - submission
+  - contest
+---
+<form id="submission-form" is="share-target">
+	<fieldset class="no-border">
+		<legend>Submit a Photo</legend>
+		<div class="status-box info">Maybe run a weekly photo contest</div>
+		<div class="form-group">
+			<label for="submit-name" class="input-label required">
+				<span>Name</span>
+			</label>
+			<input type="text" name="name" id="submit-name" class="input" placeholder="First Last" autocomplete="name" required="" />
+		</div>
+		<div class="form-group">
+			<label for="submit-email" class="input-label required">
+				<span>Email</span>
+			</label>
+			<input type="email" name="email" id="submit-email" class="input" placeholder="user@example.com" autocomplete="email" required="" />
+		</div>
+		<div class="form-group">
+			<label for="submit-phone" class="input-label required">
+				<span>Phone</span>
+			</label>
+			<input type="tel" name="telephone" id="submit-phone" class="input" placeholder="+1-555-555-5555" autocomplete="tel" required="" />
+		</div>
+		<div class="form-group">
+			<label for="submit-street-address" class="input-label required">
+				<span>Address</span>
+			</label>
+			<!-- @TODO Add PO Box -->
+			<input type="text" name="streetAddress" id="submit-street-address" class="input" placeholder="123 Main St." autocomplete="street-address" required="" />
+			<input type="text" name="addressLocality" id="submit-address-locality" class="input" placeholder="Los Angeles" autocomplete="address-level2" required="" />
+			<input type="text" name="addressRegion" id="submit-address-region" class="input" placeholder="CA" autocomplete="address-level1" required="" />
+			<input type="text" name="postalCode" id="submit-postal-code" class="input" placeholder="#####" autocomplete="postal-code" required="" />
+		</div>
+		<div class="form-group">
+			<label for="submit-caption" class="input-label">
+				<span>Caption</span>
+			</label>
+			<textarea name="caption" id="submit-caption" class="input" placeholder="Optional caption for image" autocomplete="off"></textarea>
+		</div>
+		<div class="form-group">
+			<label for="submit-image" class="input-label required">
+				<span>Image</span>
+			</label>
+			<input type="file" name="image" id="submit-image" class="input" placeholder="example.jpg" accept="image/jpeg" required="" />
+			<div id="upload-preview"></div>
+		</div>
+	</fieldset>
+	<div class="flex row space-evenly btns">
+		<button type="submit" class="btn btn-accept grow-1" title="Submit">
+			<span>Submit</span>
+			{% include common/icon.html icon="check" width="20" height="20" fill="currentColor" %}
+		</button>
+		<button type="reset" class="btn btn-reject grow-1" title="Cancel">
+			<span>Clear</span>
+			{% include common/icon.html icon="x" width="20" height="20" fill="currentColor" %}
+		</button>
+	</div>
+</form>
+{% include common/share-buttons.html facebook=true twitter=true reddit=true linkedin=true %}

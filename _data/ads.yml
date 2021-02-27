@@ -1,4 +1,4 @@
-source: jekyll-template
+source: derby-kernvalley-us
 medium: web
 campaign: kv-ads
 sidebar:
@@ -8,3 +8,8 @@ sidebar:
     callToAction: Click here to get started!
     image: https://cdn.kernvalley.us/img/branding/ads.kernvalley.us.svg
     layout: card
+  - url: https://guide.kernvalley.us
+    label: Kern Valley Guide
+    description: Looking for the address of a new burger place? Tired of Google showing results from out-of-town?
+    image: https://cdn.kernvalley.us/img/branding/guide.kernvalley.us.svg
+    callToAction: Search Local Businesses

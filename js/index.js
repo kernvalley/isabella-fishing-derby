@@ -4,6 +4,7 @@ import 'https://cdn.kernvalley.us/js/std-js/theme-cookie.js';
 import 'https://cdn.kernvalley.us/components/share-button.js';
 import 'https://cdn.kernvalley.us/components/share-to-button/share-to-button.js';
 import 'https://cdn.kernvalley.us/components/slide-show/slide-show.js';
+import 'https://cdn.kernvalley.us/components/notification/html-notification.js';
 import 'https://cdn.kernvalley.us/components/github/user.js';
 import 'https://cdn.kernvalley.us/components/current-year.js';
 import 'https://cdn.kernvalley.us/components/bacon-ipsum.js';
@@ -11,10 +12,12 @@ import 'https://cdn.kernvalley.us/components/pwa/install.js';
 import 'https://cdn.kernvalley.us/components/ad/block.js';
 import 'https://cdn.kernvalley.us/components/app/list-button.js';
 import 'https://cdn.kernvalley.us/components/app/stores.js';
-import { $, ready } from 'https://cdn.kernvalley.us/js/std-js/functions.js';
+import { $ } from 'https://cdn.kernvalley.us/js/std-js/esQuery.js';
+import { ready } from 'https://cdn.kernvalley.us/js/std-js/dom.js';
+import { loadScript } from 'https://cdn.kernvalley.us/js/std-js/loader.js';
 import { init } from 'https://cdn.kernvalley.us/js/std-js/data-handlers.js';
 import { importGa, externalHandler, telHandler, mailtoHandler } from 'https://cdn.kernvalley.us/js/std-js/google-analytics.js';
-import { submitHandler } from './contact-demo.js';
+import { submitPhoto } from './functions.js';
 import { GA } from './consts.js';
 
 $(':root').css({'--viewport-height': `${window.innerHeight}px`});
@@ -61,7 +64,37 @@ Promise.allSettled([
 ]).then(() => {
 	init().catch(console.error);
 
-	if (location.pathname.startsWith('/contact')) {
-		$('#contact-form').submit(submitHandler);
+	if (location.pathname.startsWith('/map')) {
+		loadScript('https://cdn.kernvalley.us/components/leaflet/map.min.js');
+	} else if (location.pathname.startsWith('/submit')) {
+		$('#submission-form').submit(async event => {
+			event.preventDefault();
+			const target = event.target;
+			await customElements.whenDefined('html-notification');
+			const HTMLNotification = customElements.get('html-notification');
+			const notification = new HTMLNotification('Thanks for the submission!', {
+				body: 'Your photo and info have been submitted',
+				icon: '/img/favicon.svg',
+				requireInteraction: true,
+				lang: 'en',
+				data: await submitPhoto(new FormData(target)),
+				vibrate: [200, 0, 200],
+				actions: [{
+					title: 'Dismiss',
+					action: 'dismiss',
+					icon: '/img/octicons/x.svg',
+				}],
+			});
+
+			notification.addEventListener('notificationclick', ({ action, notification }) => {
+				console.log(notification.data);
+				switch(action) {
+					case 'dismiss':
+						notification.close();
+						target.reset();
+						break;
+				}
+			});
+		});
 	}
 });

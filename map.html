@@ -1,0 +1,64 @@
+---
+layout: default
+title: Map
+permalink: /map/
+pinned: true
+index: true
+#no-header: true
+referrer: no-referrer
+description: Map of local businesses and points-of-interest for the Isabella Lake Fishing Derby
+tags:
+  - events
+  - lake isabella
+  - isabella lake
+  - fishing derby
+  - kern valley
+  - kern river valley
+  - map
+  - businesses
+  - places
+preconnect:
+  - href: https://maps.wikimedia.org
+    referrerPolicy: no-referrer
+    crossOrigin: anonymous
+preload:
+  - href: https://unpkg.com/leaflet@1.7.1/dist/leaflet.css
+    as: style
+    referrerPolicy: no-referrer
+    crossOrigin: anonymous
+    integrity: sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==
+  - href: https://cdn.kernvalley.us/components/leaflet/map.css
+    as: style
+    referrerPolicy: no-referrer
+    crossOrigin: anonymous
+  - href: https://cdn.kernvalley.us/components/leaflet/map.html
+    as: fetch
+    type: text/html
+    referrerPolicy: no-referrer
+    crossOrigin: anonymous
+  - href: https://cdn.kernvalley.us/img/markers.svg
+    as: image
+    type: image/svg+xml
+    crossOrigin: anonymous
+    referrerPolicy: no-referrer
+    importance: high
+---
+<div class="status-box info">Map showing relevant (and promoted) businesses, and maybe the last 10 or so catch locations with image</div><br />
+{% comment %}{% include not-supported.html %}
+	<div class="flex row" hidden="">
+		<button type="button" class="btn btn-primary" data-show="#business-search-toast">
+			{% include common/icon.html icon="organization" %}
+			<span class="mobile-hidden">Search Businesses by Category</span>
+		</span>
+	</div>{% endcomment %}
+	{% include map.html %}
+	{% include common/share-buttons.html facebook=true twitter=true reddit=true linkedin=true %}
+{% comment %}
+{% unless site.data.mainEvent.eventStatus == 'EventCancelled' %}
+	{% include event-search.html %}
+	{% include business-search.html %}
+	<button type="button" id="search-btn" class="btn btn-primary fixed bottom left z-top shadow round" data-show="#event-search-toast" title="Search Events">
+		{% include common/icon.html icon="search" %}
+	</button>
+{% endunless %}
+{% endcomment %}
