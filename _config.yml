@@ -1,7 +1,7 @@
 ---
 author: Chris Zuber
-title: Jekyll Template Demo
-url: 'https://infallible-galileo-ac41ee.netlify.app'
+title: Isabella Lake Fishing Derby
+url: https://musing-hodgkin-b437a7.netlify.app
 markdown: kramdown
 version: 1.3.0
 timezone: America/Los_Angeles
@@ -9,7 +9,7 @@ lang: en
 dir: ltr
 charset: utf-8
 paginate: 8
-paginate_path: "/page-:num/"
+paginate_path: "/news/page-:num/"
 viewport: "width=device-width, viewport-fit=cover"
 robots: 'follow, index'
 referrer: no-referrer
@@ -20,7 +20,7 @@ og-type: website
 keep-kern-clean: true
 description: "A template repository for Jekyll sites, including skeleton JS, CSS, SVGs, fonts, etc."
 mobile-web-app-capable: true
-canonical: https://infallible-galileo-ac41ee.netlify.app/''
+canonical: https://musing-hodgkin-b437a7.netlify.app
 keywords:
   - jekyll
   - static
@@ -35,10 +35,10 @@ keywords:
   - javascript
   - es6
 repository:
-  username: shgysk8zer0
-  project: jekyll-template
-  title: Jekyll Template
-twitter: "shgysk8zer0"
+  username: kernvalley
+  project: isabella-fishing-derby
+  title: Fishing Derby
+twitter: kern_valley
 feed:
   url: /feed.rss
   type: application/rss+xml
@@ -67,7 +67,7 @@ defaults:
         url: 'https://kernvalley.us'
         logo:
           url: 'https://kernvalley.us/img/icon-256.png'
-      permalink: /posts/:categories/:year/:month/:day/:title/
+      permalink: /news/:categories/:year/:month/:day/:title/
       comments: true
       ads: false
       index: true
@@ -87,7 +87,7 @@ defaults:
         url: 'https://kernvalley.us'
         logo:
           url: 'https://kernvalley.us/img/icon-256.png'
-      permalink: /posts/:categories/:year/:month/:day/:title/
+      permalink: /news/:categories/:year/:month/:day/:title/
       comments: false
       ads: false
 plugins:

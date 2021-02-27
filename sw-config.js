@@ -16,7 +16,9 @@ const config = {
 	stale: [
 		/* JS */
 		'/js/index.min.js',
+		'https://cdn.kernvalley.us/js/std-js/no-console.js',
 		'https://cdn.kernvalley.us/components/share-target.js',
+		'https://cdn.kernvalley.us/components/leaflet/map.min.js',
 
 		/* CSS */
 		'/css/index.min.css',
@@ -27,6 +29,7 @@ const config = {
 		'https://cdn.kernvalley.us/components/github/user.css',
 		'https://cdn.kernvalley.us/components/pwa/prompt.css',
 		'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css',
+		'https://cdn.kernvalley.us//components/notification/html-notification.css',
 
 		/* Data and JSON */
 		'/manifest.json',
@@ -38,6 +41,7 @@ const config = {
 		'https://cdn.kernvalley.us/components/slide-show/slide-show.html',
 		'https://cdn.kernvalley.us/components/github/user.html',
 		'https://cdn.kernvalley.us/components/pwa/prompt.html',
+		'https://cdn.kernvalley.us//components/notification/html-notification.html',
 
 		/* Images & Icons */
 		'/img/icons.svg',

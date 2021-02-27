@@ -1,0 +1,52 @@
+"@context": htts://schema.org
+"@type": Event
+name: Isabella Lake Fishing Derby
+description: Fishing Derby is set for April 24, 2021 thru September 6, 2021
+# url: https://whiskeyflatdays.com
+startDate: 2021-04-24
+endDate: 2021-09-06
+eventAttendanceMode: MixedEventAttendanceMode
+eventStatus: EventScheduled
+image:
+  - "@type": ImageObject
+    url: https://cdn.kernvalley.us/img/raster/missing-image.png
+    width: 640
+    height: 480
+    encodingFormat: image/png
+location:
+  "@type": Place
+  name: Isabella Lake
+  address:
+    "@type": PostalAddress
+    addressLocality: Lake Isabella
+    addressRegion: CA
+    postalCode: 93240
+  geo:
+    "@type": GeoCoordinates
+    latitude: 35.664676
+    longitude: -118.450685
+sponsor: []
+organizer:
+  "@type": Organization
+  name: Kern River Valley Chamber of Commerce
+  url: https://www.kernrivervalley.com/
+  telephone: +1-866-578-4386
+  address:
+    "@type": PostalAddress
+    streetAddress: 6414 Lake Isabella Blvd. Suite D
+    postOfficeBoxNumber: 567
+    addressLocality: Lake Isabella
+    addressRegion: CA
+    addressCountry: US
+    postalCode: 93240
+offers:
+  - "@type": Offer
+    name: "Adult Angler (16+)"
+    price: 40
+    priceCurrency: USD
+    url: https://www.kernrivervalley.com/product-page/adult-angler-16-years-and-older-1
+  - "@type": Offer
+    name: Child Entry Fee
+    price: 15
+    priceCurrency: USD
+    url: https://www.kernrivervalley.com/product-page/additional-child-for-family-pack

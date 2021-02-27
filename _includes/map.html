@@ -1,17 +1,97 @@
-<leaflet-map center="{{ include.geo.latitude }},{{ include.geo.longitude }}" zoom="{{ include.zoom | default: '13' }}" minzoom="{{ include.minzoom | default: 13 }}" maxzoom="{{ include.maxzoom | default: 15 }}" crossorigin="annonymous" loading="{{ include.loading | default: 'eager' }}" zoomcontrol="" detectretina="" aria-hidden="true"{% if include.hidden %} hidden=""{% endif %}>
-	<leaflet-marker latitude="{{ include.geo.latitude }}" longitude="{{ include.geo.longitude }}" open="">
-		{% if include.geo.url %}
-			<a href="{{ include.geo.url }}" rel="noopener external" slot="popup">
-				{% include common/icon.html icon="link-external" height="16" width="16" %}
-				<div>{{ include.geo.name }}</div>
-				{% if include.content %}{{ include.content }}{% endif %}
-			</a>
-		{% else %}
-			<div slot="popup">
-				<div>{{ include.geo.name }}</div>
-				{% if include.content %}{{ include.content }}{% endif %}
-			</div>
+<leaflet-map center="{{ site.data.mainEvent.location.geo.latitude }},{{ site.data.mainEvent.location.geo.longitude }}" class="relative contain-content z-1" zoom="13" maxzoom="19" minzoom="12" crossorigin="anonymous" detectretina="detectretina" itemtype="https://schema.org/Event" itemscope="" zoomcontrol="" router="">
+	<meta itemprop="name" content="{{ site.data.mainEvent.name | escape }}" />
+	<meta itemprop="url" content="{{ site.data.mainEvent.url }}" />
+	<meta itemprop="description" content="{{ site.data.mainEvent.description | escape }}" />
+	<meta itemprop="startDate" content="{{ site.data.mainEvent.startDate }}" />
+	<meta itemprop="endDate" content="{{ site.data.mainEvent.endDate }}" />
+	<meta itemprop="image" content="{{ site.data.mainEvent.image.first.url }}" />
+	<meta itemprop="eventAttendanceMode" content="{{ site.data.mainEvent.eventAttendanceMode | default: 'https://schema.org/OfflineEventAttendanceMode' }}" />
+	<meta itemprop="eventStatus" content="{{ site.data.mainEvent.eventStatus | default: 'https://schema.org/EventScheduled' }}" />
+	<div itemprop="organizer" itemtype="https://schema.org/{{ site.data.mainEvent.organizer['@type'] | default: 'Organization' }}" itemscope="" hidden="">
+		<meta itemprop="name" content="{{ site.data.mainEvent.organizer.name }}" />
+		<meta itemprop="url" content="{{ site.data.mainEvent.organizer.url }}" />
+	</div>
+	<address itemprop="location" itemtype="https://schema.org/{{ site.data.mainEvent.location['@type'] | default: 'Place' }}" itemscope="" hidden="">
+		<meta itemprop="name" content="{{ site.data.mainEvent.location.name }}" />
+		<div itemprop="address" itemtype="https://schema.org/PostalAddress" itemscope="" hidden="">
+			<meta itemprop="addressLocality" content="{{ site.data.mainEvent.location.address.addressLocality }}" />
+			<meta itemprop="addressRegion" content="{{ site.data.mainEvent.location.address.addressRegion }}" />
+			<meta itemprop="addressCountry" content="{{ site.data.mainEvent.location.address.addressCountry }}" />
+			<meta itemprop="postalCode" content="{{ site.data.mainEvent.location.address.postalCode }}" />
+		</div>
+		<div itemprop="geo" itemtype="https://schema.org/GeoCoordinates" itemscope="" hidden="">
+			<meta itemprop="longitude" content="{{ site.data.mainEvent.location.geo.latitude }}" />
+			<meta itemprop="latitude" content="{{ site.data.mainEvent.location.geo.longitude }}" />
+		</div>
+	</address>
+	{% for town in site.data.places.towns %}
+		<leaflet-marker slot="markers" latitude="{{ town.latitude }}" longitude="{{ town.longitude }}" title="{{ town.name | escape }}" id="{{ town.identifier }}">
+			<img slot="icon" src="https://cdn.kernvalley.us/img/markers.svg#city" width="30" height="30" crossorigin="anonymous" referrerpolicy="no-referrer" alt="" />
+			<h3 slot="popup">{{ town.name }}, CA</h3>
+		</leaflet-marker>
+	{% endfor %}
+	{% for place in site.data.places.businesses %}
+		{% if place.geo %}
+			{% include leaflet/local-business-marker.html business=place minZoom=17 %}
+		{% elsif place.location.geo %}
+			{% include leaflet/local-business-marker.html business=place minZoom=17 %}
 		{% endif %}
-		<img slot="icon" src="{{ include.icon | default: '/img/adwaita-icons/actions/mark-location.svg' }}" width="32" height="32" decoding="async" loading="lazy" />
-	</leaflet-marker>
+	{% endfor %}
+	{% for place in site.data.places.restuarants %}
+		{% if place.geo %}
+			{% include leaflet/restaurant-marker.html business=place minZoom=14 %}
+		{% endif %}
+	{% endfor %}
+	{% for place in site.data.places.cafes %}
+		{% if place.geo %}
+			{% include leaflet/restaurant-marker.html business=place minZoom=16 %}
+		{% endif %}
+	{% endfor %}
+	{% for place in site.data.places.gas %}
+		{% if place.geo %}
+			{% include leaflet/local-business-marker.html business=place %}
+		{% endif %}
+	{% endfor %}
+	{% for place in site.data.places.stores %}
+		{% if place.geo %}
+			{% include leaflet/local-business-marker.html business=place minZoom=16 %}
+		{% endif %}
+	{% endfor %}
+	{% for place in site.data.places.bars %}
+		{% if place.geo %}
+			{% include leaflet/local-business-marker.html business=place minZoom=18 %}
+		{% endif %}
+	{% endfor %}
+	{% for place in site.data.places.financial %}
+		{% if place.geo %}
+			{% include leaflet/local-business-marker.html business=place minZoom=18 %}
+		{% endif %}
+	{% endfor %}
+	{% for place in site.data.places.civic %}
+		{% if place.geo %}
+			{% include leaflet/local-business-marker.html business=place %}
+		{% elsif place.location.geo %}
+			{% include leaflet/local-business-marker.html business=place %}
+		{% endif %}
+	{% endfor %}
+	{% for place in site.data.places.campgrounds %}
+		{% if place.geo or place.location.geo %}
+			{% include leaflet/local-business-marker.html business=place %}
+		{% endif %}
+	{% endfor %}
+	{% for place in site.data.places.lodging %}
+		{% if place.geo or place.location.geo %}
+			{% include leaflet/local-business-marker.html business=place %}
+		{% endif %}
+	{% endfor %}
+	{% for place in site.data.places.landmarks %}
+		{% if place.geo or place.location.geo %}
+			{% include leaflet/local-business-marker.html business=place %}
+		{% endif %}
+	{% endfor %}
+	{% for place in site.data.places.activities %}
+		{% if place.geo or place.location.geo %}
+			{% include leaflet/local-business-marker.html business=place %}
+		{% endif %}
+	{% endfor %}
 </leaflet-map>

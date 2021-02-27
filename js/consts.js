@@ -1,4 +1,4 @@
-export const GA = null;
+export const GA = 'UA-119717465-15';
 
 export const env = (location.hostname === 'localhost' || location.hostname.endsWith('.netlify.live'))
 	? 'development'
@@ -7,5 +7,5 @@ export const env = (location.hostname === 'localhost' || location.hostname.endsW
 export const dev = env === 'development';
 
 export const site = {
-	title: 'Jekyll Template',
+	title: 'Isabella Lake Fishing Derby',
 };
