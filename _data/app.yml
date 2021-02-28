@@ -125,11 +125,16 @@ shortcuts:
 share_target:
   name: Submit Photo to IL Fishing Derby
   action: /submit
-  enctype: application/x-www-form-urlencoded
-  method: GET
+  enctype: multipart/form-data
+  method: POST
   params:
     title: subject
     caption: body
+    files:
+      - name: image
+        accept:
+          - image/jpeg
+          - image/png
 # iarc_rating_id:
 related_applications:
   - platform: webapp
