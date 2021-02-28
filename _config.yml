@@ -56,6 +56,8 @@ defaults:
       path: _posts
     values:
       layout: post
+      comments: true
+      ads: false
       index: true
       author:
         givenName: Chris
@@ -71,9 +73,6 @@ defaults:
         logo:
           url: 'https://kernvalley.us/img/icon-256.png'
       permalink: /news/:categories/:year/:month/:day/:title/
-      comments: true
-      ads: false
-      index: true
   - scope:
       path: _drafts
     values:
