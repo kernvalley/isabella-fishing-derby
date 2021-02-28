@@ -1,5 +1,23 @@
 <aside id="sidebar" class="card shadow">
-	{% if include.pinned-posts %}{% include articles/pinned-posts.html count=layout.pinned-posts %}{% endif %}
+	{% if site.data.keys.openWeatherMap %}
+		{% include common/weather.html appId=site.data.keys.openWeatherMap %}
+	{% endif %}
+	{% if include.pinned-posts %}
+		{% include articles/pinned-posts.html count=layout.pinned-posts %}
+	{% endif %}
+	<section class="sidebar-section">
+		<h3 class="center">Featured Products</h3>
+		{% for page in site.products %}
+			<a href="{{ page.url }}" class="card shadow block featured-product">
+				<h4 class="center">{{ page.product.name }}</h4>
+				<div class="center">
+					{% for img in page.product.image %}
+						<img src="{{ img.url }}" loading="lazy" decoding="async" crossorigin="anonymous" referrerpolicy="no-referrer" width="192" height="192" alt="" />
+					{% endfor %}
+				</div>
+			</a>
+		{% endfor %}
+	</section>
 	{% if page.ads %}{% for ad in page.ads %}
 		{% include common/ad.html ad=ad content="sidebar" %}
 	{% endfor %}{% endif %}
