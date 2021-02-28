@@ -1,4 +1,6 @@
-main {
+@import url("./store.css");
+
+#main {
 	--link-color: #049ccf;
 	--link-decoration: underline;
 }

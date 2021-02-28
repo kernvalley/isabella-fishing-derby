@@ -1,0 +1,5 @@
+#product-gallery.grid {
+	grid-template-columns: repeat(auto-fill, minmax(20vw, 400px));
+	gap: 12px;
+	justify-content: space-evenly;
+}

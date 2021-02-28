@@ -9,7 +9,7 @@ lang: en
 dir: ltr
 charset: utf-8
 paginate: 8
-paginate_path: "/news/page-:num/"
+paginate_path: "/news/:num/"
 viewport: "width=device-width, viewport-fit=cover"
 robots: 'follow, index'
 referrer: no-referrer
@@ -42,11 +42,21 @@ icons: /img/icons.svg
 # webmaster-verifications:
 #   google:
 #   bing:
+collections:
+  products:
+    output: true
+    permalink: /shop/:name/
 defaults:
+  - scope:
+      path: _products
+    values:
+      layout: product
+      index: true
   - scope:
       path: _posts
     values:
       layout: post
+      index: true
       author:
         givenName: Chris
         familyName: Zuber
