@@ -12,6 +12,7 @@ import 'https://cdn.kernvalley.us/components/pwa/install.js';
 import 'https://cdn.kernvalley.us/components/ad/block.js';
 import 'https://cdn.kernvalley.us/components/app/list-button.js';
 import 'https://cdn.kernvalley.us/components/app/stores.js';
+import 'https://cdn.kernvalley.us/components/weather/current.js';
 import { $ } from 'https://cdn.kernvalley.us/js/std-js/esQuery.js';
 import { ready } from 'https://cdn.kernvalley.us/js/std-js/dom.js';
 import { loadScript } from 'https://cdn.kernvalley.us/js/std-js/loader.js';

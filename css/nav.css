@@ -1,6 +1,10 @@
 #nav {
 	font-size: 1.2em;
 	gap: 18px;
+	justify-content: space-around;
+	grid-area: nav;
+	max-height: calc(100vh - var(--nav-height, 4rem));
+	overflow: auto;
 }
 
 #nav > .nav-btn {
@@ -14,7 +18,7 @@
 }
 
 @media (max-width: 450px) {
-	.nav-link-label {
+	#nav .grow-4 {
 		display: none;
 	}
 }

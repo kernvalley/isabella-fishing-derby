@@ -5,6 +5,19 @@
 	--link-decoration: underline;
 }
 
+#main .grid-gallery {
+	grid-template-columns: repeat(auto-fill, minmax(20vw, 350px));
+	gap: 12px;
+	justify-content: space-evenly;
+}
+
+#main .post-img {
+	height: 209px;
+	width: 100%;
+	object-fit: cover;
+	object-position: center;
+}
+
 article p:first-letter {
 	margin-left: 2em;
 }
