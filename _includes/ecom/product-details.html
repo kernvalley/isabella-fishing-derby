@@ -22,13 +22,13 @@
 		<blockquote itemprop="description">{{ include.product.description }}</blockquote>
 	{% endif %}
 	{% for offer in include.product.offers %}
-		<span id="{{ offer.identifier }}" itemprop="offers" itemtype="https://schema.org/{{ offer['@type'] | default: 'Offer' }}" itemscope="">
+		<button id="{{ offer.identifier }}" class="btn btn-primary purchase-btn" data-label="{{ include.product.name | escape }}" data-price="{{ offer.price }}" itemprop="offers" itemtype="https://schema.org/{{ offer['@type'] | default: 'Offer' }}" itemscope="">
 			<span itemprop="name">{{ offer.name | default: 'Price' }}</span>
 			<meta itemprop="priceCurrency" content="{{ offer.priceCurrency | default: 'USD' }}" />
 			<link itemprop="availability" href="https://schema.org/{{ offer.availability | remove: 'https://schema.org/' | default: 'InStock' }}" />
 			<span class="currency-symbol">$</span>
 			<span itemprop="price">{{ offer.price }}</span>
-		</span>
+		</button>
 	{% endfor %}
 	{% if include.product.aggregateRating %}
 		<div itemprop="aggregateRating" itemtype="https://schema.org/{{ include.product.aggregateRating['@type'] | remove: 'https://schema.org/' | default: 'AggregateRating' }}" itemscope="" hidden="">

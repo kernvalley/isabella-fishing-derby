@@ -17,7 +17,7 @@ import { ready } from 'https://cdn.kernvalley.us/js/std-js/dom.js';
 import { loadScript } from 'https://cdn.kernvalley.us/js/std-js/loader.js';
 import { init } from 'https://cdn.kernvalley.us/js/std-js/data-handlers.js';
 import { importGa, externalHandler, telHandler, mailtoHandler } from 'https://cdn.kernvalley.us/js/std-js/google-analytics.js';
-import { submitPhoto } from './functions.js';
+import { submitPhoto, buy } from './functions.js';
 import { GA } from './consts.js';
 
 $(':root').css({'--viewport-height': `${window.innerHeight}px`});
@@ -66,6 +66,17 @@ Promise.allSettled([
 
 	if (location.pathname.startsWith('/map')) {
 		loadScript('https://cdn.kernvalley.us/components/leaflet/map.min.js');
+	} else if (location.pathname.startsWith('/shop/') && location.pathname !== '/shop/') {
+		if ('PaymentRequest' in window) {
+			$('.purchase-btn').click(async function() {
+				await buy({
+					label: this.dataset.label,
+					price: parseFloat(this.dataset.price),
+				});
+			});
+		} else {
+			$('.purchase-btn').toggleClass({ 'no-pointer-events': true });
+		}
 	} else if (location.pathname.startsWith('/submit')) {
 		$('#submission-form').submit(async event => {
 			event.preventDefault();
