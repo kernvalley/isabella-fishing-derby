@@ -1,0 +1,45 @@
+<div id="{{ include.product.identifier }}" class="card shadow inline-block product-entry" itemtype="https://schema.org/{{ include.product['@type'] | default: 'Product' }}" itemscope="">
+	<link itemprop="itemCondition" href="https://schema.org/{{ include.product.itemCondition | remove: 'https://schema.org/' | default: 'NewCondition' }}" />
+	<a href="{{ include.url }}" class="block color-inherit" itemprop="url">
+		{% if include.product.mpn %}
+			<meta itemprop="mpn" content="{{ include.product.mpn }}" />
+		{% endif %}
+		<meta itemprop="sku" content="{{ include.product.sku | default: include.product.identifier }}" />
+		<h3 class="center product-name">
+			{% if include.product.brand %}
+				<span itemprop="brand">{{ include.product.brand.name | default: include.product.brand }}</span>
+			{% endif %}
+			<span itemprop="name">{{ include.product.name }}</span>
+		</h3>
+		{% for image in include.product.image %}
+			<figure class="center" itemprop="image" itemtype="https://schema.org/{{ image['@type'] | default: 'ImageObject' }}" itemscope="">
+				<img src="{{ image.url }}" loading="lazy" decoding="async" crossorogin="anonymous" referrerpolicy="no-referrer" height="{{ image.height }}" width="{{ image.width }}" itemprop="url" alt="" />
+				{% if image.caption %}
+					<figcaption itemprop="caption">{{ image.caption }}</figcaption>
+				{% endif %}
+			</figure>
+		{% endfor %}
+	</a>
+	{% if include.product.description %}
+		<blockquote itemprop="description">{{ include.product.description }}</blockquote>
+	{% endif %}
+	{% for offer in include.product.offers %}
+		<span id="{{ offer.identifier }}" itemprop="offers" itemtype="https://schema.org/{{ offer['@type'] | default: 'Offer' }}" itemscope="">
+			<span itemprop="name">{{ offer.name | default: 'Price' }}</span>
+			<meta itemprop="priceCurrency" content="{{ offer.priceCurrency | default: 'USD' }}" />
+			<link itemprop="availability" href="https://schema.org/{{ offer.availability | remove: 'https://schema.org/' | default: 'InStock' }}" />
+			<span class="currency-symbol">$</span>
+			<span itemprop="price">{{ offer.price }}</span>
+		</span>
+	{% endfor %}
+	{% if include.product.aggregateRating %}
+		<div itemprop="aggregateRating" itemtype="https://schema.org/{{ include.product.aggregateRating['@type'] | remove: 'https://schema.org/' | default: 'AggregateRating' }}" itemscope="" hidden="">
+			<meta itemprop="ratingValue" content="{{ include.product.aggregateRating.ratingValue }}" />
+			<meta itemprop="ratingCount" content="{{ include.product.aggregateRating.ratingCount | default: 1 }}" />
+		</div>
+	{% endif %}
+	<details>
+		<summary>More Info</summary>
+		<pre><code>{{ include.product | jsonify | escape }}</code></pre>
+	</details>
+</div>

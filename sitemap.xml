@@ -4,6 +4,12 @@ index: false
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	{% for page in site.pages %}{% if page.index %}
+	<url>
+		<loc>{{ page.url | absolute_url }}</loc>
+		<lastmod>{{ site.time | date: '%Y-%m-%d' }}</lastmod>
+	</url>
+	{% endif %}{% endfor %}
 	{% for post in site.posts limit: 10 %}{% if post.index %}
 	<url>
 		<loc>{{ post.url | absolute_url }}</loc>
@@ -14,10 +20,11 @@ index: false
 		{% endif %}
 	</url>
 	{% endif %}{% endfor %}
-	{% for page in site.pages %}{% if page.index %}
+	{% for page in site.products %}{% if page.index %}
 	<url>
 		<loc>{{ page.url | absolute_url }}</loc>
 		<lastmod>{{ site.time | date: '%Y-%m-%d' }}</lastmod>
 	</url>
 	{% endif %}{% endfor %}
+
 </urlset>

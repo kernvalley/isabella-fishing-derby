@@ -10,6 +10,7 @@ const config = {
 		/* Root document, pages, and posts */
 		'{{ site.pages | where: "pinned", true | map: "url" | join: "', '" }}',
 		'{{ site.posts | where: "pinned", true | map: "url" | join: "', '" }}',
+		'{{ site.products | map: "url" | join: "', '" }}',
 		'/manifest.json',
 		'https://apps.kernvalley.us/apps.json',
 	].map(path => new URL(path, location.origin).href),
@@ -53,8 +54,8 @@ const config = {
 		'/img/favicon.svg',
 		'https://cdn.kernvalley.us/img/keep-kern-clean.svg',
 		'https://cdn.kernvalley.us/img/logos/play-badge.svg',
-		'https://cdn.kernvalley.us/img/logos/itunes-badge.svg',
-		'https://cdn.kernvalley.us/img/logos/windows-badge.svg',
+		// 'https://cdn.kernvalley.us/img/logos/itunes-badge.svg',
+		// 'https://cdn.kernvalley.us/img/logos/windows-badge.svg',
 		'https://cdn.kernvalley.us/img/logos/instagram.svg',
 		'https://cdn.kernvalley.us/img/markers.svg',
 
@@ -67,7 +68,7 @@ const config = {
 		'https://maps.wikimedia.org/osm-intl/',
 		'/https://i.imgur.com/',
 		'/https://secure.gravatar.com/avatar/',
-		/https:\/\/*\.githubusercontent\.com\/u\/*/,
+		/https:\/\/\w+\.githubusercontent\.com\/u\/*/,
 	],
 	allowedFresh: [
 		'https://baconipsum.com/api/',
