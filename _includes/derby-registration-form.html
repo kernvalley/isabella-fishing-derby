@@ -1,0 +1,34 @@
+<dialog id="derby-registration-dialog">
+	<form id="derby-registration-form">
+		<fieldset class="no-border">
+			<legend>Derby Registration</legend>
+			<div class="form-group">
+				<label for="adult-registration" class="input-label required">
+					<span>Adults <i>(16+)</i></span>
+				</label>
+				<input type="number" name="adults" id="adult-registration" class="input register-qty" placeholder="##" min="1" max="50" value="1" required="" />
+			</div>
+			<div class="form-group">
+				<label for="child-registration" class="input-label required">
+					<span>Children</span>
+				</label>
+				<input type="number" name="children" id="child-registration" class="input register-qty" placeholder="##" min="0" max="80" value="0" required="" />
+			</div>
+		</fieldset>
+		<div class="status-box info">
+			<h4 class="center underline">No Returns or Refunds</h4>
+			<p>We are not able to return registration funds. This event is entirely funded by the support of the community. Thank you!</p>
+		</div>
+		<div class="flex row btns">
+			<button type="submit" class="btn btn-accept">
+				<span>Submit</span>
+				{% include common/icon.html icon="check" width="20" height="20" fill="currentColor" %}
+			</button>
+			<span class="spacer"></span>
+			<button type="reset" class="btn btn-reject" data-close="#derby-registration-dialog">
+				<span>Cancel</span>
+				{% include common/icon.html icon="check" width="20" height="20" fill="currentColor" %}
+			</button>
+		</div>
+	</form>
+</dialog>

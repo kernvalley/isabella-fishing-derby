@@ -18,7 +18,7 @@ import { ready } from 'https://cdn.kernvalley.us/js/std-js/dom.js';
 import { loadScript } from 'https://cdn.kernvalley.us/js/std-js/loader.js';
 import { init } from 'https://cdn.kernvalley.us/js/std-js/data-handlers.js';
 import { importGa, externalHandler, telHandler, mailtoHandler } from 'https://cdn.kernvalley.us/js/std-js/google-analytics.js';
-import { submitPhoto, buy } from './functions.js';
+import { submitPhoto, buy, derbyRegister } from './functions.js';
 import { GA } from './consts.js';
 
 $(':root').css({'--viewport-height': `${window.innerHeight}px`});
@@ -70,10 +70,13 @@ Promise.allSettled([
 	} else if (location.pathname.startsWith('/shop/') && location.pathname !== '/shop/') {
 		if ('PaymentRequest' in window) {
 			$('.purchase-btn').click(async function() {
-				await buy({
+				await buy([{
 					label: this.dataset.label,
-					price: parseFloat(this.dataset.price),
-				});
+					amount: {
+						currency: 'USD',
+						value: parseFloat(this.dataset.price),
+					}
+				}]).catch(err => alert(err));
 			});
 		} else {
 			$('.purchase-btn').toggleClass({ 'no-pointer-events': true });
@@ -109,4 +112,27 @@ Promise.allSettled([
 			});
 		});
 	}
+
+	$('#derby-registration-form .register-qty').on('focus', ({ target }) => {
+		target.select();
+	});
+
+	$('#derby-registration-form').submit(async event => {
+		event.preventDefault();
+		const target = event.target;
+		const data = new FormData(target);
+
+		try {
+			const result = await derbyRegister({
+				adults: parseInt(data.get('adults')),
+				children: parseInt(data.get('children')),
+			});
+
+			console.info(result);
+			target.reset();
+			target.closest('dialog[open]').close();
+		} catch(err) {
+			alert(err);
+		}
+	});
 });
