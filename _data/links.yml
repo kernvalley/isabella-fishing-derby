@@ -5,12 +5,12 @@ nav:
   - label: News
     icon: x-office-document
     href: /news/
-  - label: Map
-    icon: map
-    href: /map/
   - label: Shop
     icon: store
     href: /shop/
+  - label: Map
+    icon: map
+    href: /map/
   - label: Submit
     icon: cloud-upload
     href: /submit/

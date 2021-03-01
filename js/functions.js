@@ -1,23 +1,17 @@
 import { uuidv6 } from 'https://cdn.kernvalley.us/js/std-js/uuid.js';
-import { supportedInstruments, shippingOptions } from './consts.js';
+import { supportedInstruments, shippingOptions, registrationCost } from './consts.js';
 
 // @SEE https://developer.mozilla.org/en-US/docs/Web/API/PaymentRequest/PaymentRequest
-export async function buy({ label, price }) {
+export async function buy(displayItems) {
 	const details = {
 		total: {
-			label,
+			label: 'Total',
 			amount: {
 				currency: 'USD',
-				value: price.toFixed(2),
+				value: getTotal(displayItems),
 			}
 		},
-		displayItems: [{
-			label,
-			amount: {
-				currency: 'USD',
-				value:price.toFixed(2),
-			}
-		}],
+		displayItems,
 		shippingOptions
 	};
 
@@ -29,6 +23,10 @@ export async function buy({ label, price }) {
 	} catch (e) {
 		console.error(e);
 	}
+}
+
+function getTotal(items, shipping = { amount: { value: 0 }}) {
+	return [...items, shipping].reduce((sum, { amount: { value }}) => sum + value, 0).toFixed(2);
 }
 
 export async function submitPhoto(data) {
@@ -56,5 +54,25 @@ export async function submitPhoto(data) {
 				}
 			}
 		};
+	}
+}
+
+export async function derbyRegister({ adults = 1, children = 0 } = {}) {
+	if (! (Number.isInteger(adults) && Number.isInteger(children))) {
+		throw new TypeError('Adults and children must be integers');
+	} else {
+		return await buy([{
+			label: `Adults (16+): ${adults}`,
+			amount: {
+				currency: 'USD',
+				value: Math.max(adults, 1) * registrationCost.adults,
+			}
+		}, {
+			label: `Children: ${children}`,
+			amount: {
+				currency: 'USD',
+				value: Math.max(children, 0) * registrationCost.children,
+			}
+		}]);
 	}
 }
