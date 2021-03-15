@@ -3,3 +3,11 @@
 	gap: 12px;
 	justify-content: space-evenly;
 }
+
+a.btn {
+	text-decoration: inherit;
+}
+
+a.btn.btn-primary:hover {
+	color: var(--button-primary-color);
+}

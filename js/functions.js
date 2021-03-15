@@ -1,32 +1,43 @@
 import { uuidv6 } from 'https://cdn.kernvalley.us/js/std-js/uuid.js';
-import { supportedInstruments, shippingOptions, registrationCost } from './consts.js';
+import { supportedInstruments, registrationCost } from './consts.js';
+import { getCustomElement } from 'https://cdn.kernvalley.us/js/std-js/custom-elements.js';
+import { preload, loadScript } from 'https://cdn.kernvalley.us/js/std-js/loader.js';
+import { create } from 'https://cdn.kernvalley.us/js/std-js/dom.js';
 
-// @SEE https://developer.mozilla.org/en-US/docs/Web/API/PaymentRequest/PaymentRequest
-export async function buy(displayItems) {
-	const details = {
-		total: {
-			label: 'Total',
-			amount: {
-				currency: 'USD',
-				value: getTotal(displayItems),
-			}
-		},
-		displayItems,
-		shippingOptions
-	};
+export async function pay(details, opts = {}, fallback = false) {
+	if ('PaymentRequest' in window && fallback === false) {
+		const req = new window.PaymentRequest(supportedInstruments, details, opts);
+		if (await req.canMakePayment()) {
+			return req;
+		} else {
+			return await pay(details, opts, true);
+		}
+	} else if (typeof customElements.get('payment-request') === 'undefined') {
+		const [HTMLPaymentRequestElement] = await Promise.all([
+			getCustomElement('payment-request'),
+			loadScript('https://cdn.kernvalley.us/components/payment/request.js', { type: 'module' }),
+			preload('https://cdn.kernvalley.us/components/payment/request.html', { as: 'fetch' }),
+			preload('https://cdn.kernvalley.us/components/payment/request.css', { as: 'style' }),
+		]);
 
-	try {
-		const request = new PaymentRequest(supportedInstruments, details, { requestShipping: true });
-		// Add event listeners here.
-		// Call show() to trigger the browser's payment flow.
-		return await request.show().catch(console.error);
-	} catch (e) {
-		console.error(e);
+		window.PaymentRequest = HTMLPaymentRequestElement;
+		const req = new HTMLPaymentRequestElement(supportedInstruments, details, opts);
+
+		if (await req.canMakePayment()) {
+			return req;
+		} else {
+			throw new DOMException('No payment methods supported');
+		}
+	} else {
+		const HTMLPaymentRequestElement = customElements.get('payment-request');
+		const req = new HTMLPaymentRequestElement(supportedInstruments, details, opts);
+
+		if (await req.canMakePayment()) {
+			return req;
+		} else {
+			throw new DOMException('No payment methods supported');
+		}
 	}
-}
-
-function getTotal(items, shipping = { amount: { value: 0 }}) {
-	return [...items, shipping].reduce((sum, { amount: { value }}) => sum + value, 0).toFixed(2);
 }
 
 export async function submitPhoto(data) {
@@ -61,7 +72,7 @@ export async function derbyRegister({ adults = 1, children = 0 } = {}) {
 	if (! (Number.isInteger(adults) && Number.isInteger(children))) {
 		throw new TypeError('Adults and children must be integers');
 	} else {
-		return await buy([{
+		const displayItems = [{
 			label: `Adults (16+): ${adults}`,
 			amount: {
 				currency: 'USD',
@@ -73,6 +84,40 @@ export async function derbyRegister({ adults = 1, children = 0 } = {}) {
 				currency: 'USD',
 				value: Math.max(children, 0) * registrationCost.children,
 			}
-		}]);
+		}];
+
+		const req = await pay({
+			total: {
+				label: 'Registration Total',
+				amount: {
+					currency: 'USD',
+					value: displayItems.reduce((total, { amount: { value }}) => total + value, 0).toFixed(2),
+				}
+			},
+			displayItems,
+		}, {
+			requestPayerName: true,
+			requestPayerEmail: true,
+			requestPayerPhone: true,
+		});
+
+		const resp = await req.show();
+		const dialog = create('dialog', {
+			children: [
+				create('pre', {
+					children: [
+						create('code', { text: JSON.stringify(resp, null, 4 )}),
+					]
+				})
+			],
+			events: {
+				click: ({ target }) => target.closest('dialog').close(),
+				close: ({ target }) => target.remove(),
+			}
+		});
+
+		document.body.append(dialog);
+		resp.complete('success');
+		dialog.showModal();
 	}
 }

@@ -29,6 +29,7 @@
 			<span class="currency-symbol">$</span>
 			<span itemprop="price">{{ offer.price }}</span>
 		</button>
+		<a href="/checkout/" role="button" class="btn btn-primary" title="Go to Checkout Page">Checkout</a>
 	{% endfor %}
 	{% if include.product.aggregateRating %}
 		<div itemprop="aggregateRating" itemtype="https://schema.org/{{ include.product.aggregateRating['@type'] | remove: 'https://schema.org/' | default: 'AggregateRating' }}" itemscope="" hidden="">

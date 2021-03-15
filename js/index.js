@@ -15,11 +15,13 @@ import 'https://cdn.kernvalley.us/components/app/stores.js';
 import 'https://cdn.kernvalley.us/components/weather/current.js';
 import { $ } from 'https://cdn.kernvalley.us/js/std-js/esQuery.js';
 import { ready } from 'https://cdn.kernvalley.us/js/std-js/dom.js';
-import { loadScript } from 'https://cdn.kernvalley.us/js/std-js/loader.js';
 import { init } from 'https://cdn.kernvalley.us/js/std-js/data-handlers.js';
+import { loadScript } from 'https://cdn.kernvalley.us/js/std-js/loader.js';
 import { importGa, externalHandler, telHandler, mailtoHandler } from 'https://cdn.kernvalley.us/js/std-js/google-analytics.js';
-import { submitPhoto, buy, derbyRegister } from './functions.js';
+import { ShoppingCart } from 'https://cdn.kernvalley.us/js/std-js/ShoppingCart.js';
+import { submitPhoto, derbyRegister } from './functions.js';
 import { GA } from './consts.js';
+import 'https://cdn.kernvalley.us/components/shopping-cart.js';
 
 $(':root').css({'--viewport-height': `${window.innerHeight}px`});
 
@@ -44,10 +46,8 @@ $(document.documentElement).toggleClass({
 
 if (typeof GA === 'string' && GA.length !== 0) {
 	requestIdleCallback(() => {
-		importGa(GA).then(async ({ ga }) => {
-			if (ga instanceof Function) {
-				ga('create', GA, 'auto');
-				ga('set', 'transport', 'beacon');
+		importGa(GA).then(async ({ ga, hasGa }) => {
+			if (hasGa()) {
 				ga('send', 'pageview');
 
 				await ready();
@@ -62,25 +62,22 @@ if (typeof GA === 'string' && GA.length !== 0) {
 
 Promise.allSettled([
 	ready(),
-]).then(() => {
+]).then(async () => {
 	init().catch(console.error);
 
 	if (location.pathname.startsWith('/map')) {
 		loadScript('https://cdn.kernvalley.us/components/leaflet/map.min.js');
 	} else if (location.pathname.startsWith('/shop/') && location.pathname !== '/shop/') {
-		if ('PaymentRequest' in window) {
-			$('.purchase-btn').click(async function() {
-				await buy([{
-					label: this.dataset.label,
-					amount: {
-						currency: 'USD',
-						value: parseFloat(this.dataset.price),
-					}
-				}]).catch(err => alert(err));
-			});
-		} else {
-			$('.purchase-btn').toggleClass({ 'no-pointer-events': true });
-		}
+		const cart = new ShoppingCart();
+
+		$('.purchase-btn').click(async function() {
+			await cart.addItem({
+				uuid: this.id,
+				name: this.dataset.label,
+				price: parseFloat(this.dataset.price),
+				quantity: 1,
+			}).catch(err => alert(err));
+		});
 	} else if (location.pathname.startsWith('/submit')) {
 		$('#submission-form').submit(async event => {
 			event.preventDefault();
@@ -121,18 +118,12 @@ Promise.allSettled([
 		event.preventDefault();
 		const target = event.target;
 		const data = new FormData(target);
+		const result = derbyRegister({
+			adults: parseInt(data.get('adults')),
+			children: parseInt(data.get('children')),
+		});
+		target.closest('dialog[open]').close();
 
-		try {
-			const result = await derbyRegister({
-				adults: parseInt(data.get('adults')),
-				children: parseInt(data.get('children')),
-			});
-
-			console.info(result);
-			target.reset();
-			target.closest('dialog[open]').close();
-		} catch(err) {
-			alert(err);
-		}
+		result.then(console.log);
 	});
 });
