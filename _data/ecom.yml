@@ -1,0 +1,18 @@
+---
+shippingOptions:
+  - id: free
+    label: Free Shipping
+    selected: true
+    amount:
+      currency: USD
+      value: 0
+  - id: standard
+    label: Standard Shipping
+    amount:
+      currency: USD
+      value: 12.87
+supportedNetworks:
+  - discover
+  - visa
+  - amex
+  - mastercard

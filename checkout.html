@@ -1,0 +1,12 @@
+---
+layout: default
+title: Checkout
+permalink: /checkout/
+pinned: true
+index: true
+itemtype: https://schema.org/CheckoutPage
+---
+<shopping-cart id="shopping-cart" class="block" supportednetworks="{{ site.data.ecom.supportedNetworks | join: ' ' }}" requestpayername="" requestpayerphone="" requestpayeremail="" requestshiping="">
+	<script type="application/json">{{ site.data.ecom.shippingOptions | jsonify }}</script>
+	<div class="status-box warn">Sorry, but your browser does not support the minimum features to complete checkout.</div>
+</shopping-cart>
