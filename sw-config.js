@@ -20,6 +20,7 @@ const config = {
 		'https://cdn.kernvalley.us/js/std-js/no-console.js',
 		'https://cdn.kernvalley.us/components/share-target.js',
 		'https://cdn.kernvalley.us/components/leaflet/map.min.js',
+		'https://cdn.kernvalley.us/components/payment/request.js',
 
 		/* CSS */
 		'/css/index.min.css',
@@ -32,6 +33,7 @@ const config = {
 		'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css',
 		'https://cdn.kernvalley.us//components/notification/html-notification.css',
 		'https://cdn.kernvalley.us/components/weather/current.css',
+		'https://cdn.kernvalley.us/components/payment/request.css',
 
 		/* Data and JSON */
 		'/manifest.json',
@@ -45,6 +47,7 @@ const config = {
 		'https://cdn.kernvalley.us/components/pwa/prompt.html',
 		'https://cdn.kernvalley.us//components/notification/html-notification.html',
 		'https://cdn.kernvalley.us/components/weather/current.html',
+		'https://cdn.kernvalley.us/components/payment/request.html',
 
 		/* Images & Icons */
 		'/img/icons.svg',
