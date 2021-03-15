@@ -4,6 +4,42 @@ import { getCustomElement } from 'https://cdn.kernvalley.us/js/std-js/custom-ele
 import { preload, loadScript } from 'https://cdn.kernvalley.us/js/std-js/loader.js';
 import { create } from 'https://cdn.kernvalley.us/js/std-js/dom.js';
 
+export async function pay(details, opts = {}, fallback = false) {
+	if ('PaymentRequest' in window && fallback === false) {
+		const req = new window.PaymentRequest(supportedInstruments, details, opts);
+		if (await req.canMakePayment()) {
+			return req;
+		} else {
+			return await pay(details, opts, true);
+		}
+	} else if (typeof customElements.get('payment-request') === 'undefined') {
+		const [HTMLPaymentRequestElement] = await Promise.all([
+			getCustomElement('payment-request'),
+			loadScript('https://cdn.kernvalley.us/components/payment/request.js', { type: 'module' }),
+			preload('https://cdn.kernvalley.us/components/payment/request.html', { as: 'fetch' }),
+			preload('https://cdn.kernvalley.us/components/payment/request.css', { as: 'style' }),
+		]);
+
+		window.PaymentRequest = HTMLPaymentRequestElement;
+		const req = new HTMLPaymentRequestElement(supportedInstruments, details, opts);
+
+		if (await req.canMakePayment()) {
+			return req;
+		} else {
+			throw new DOMException('No payment methods supported');
+		}
+	} else {
+		const HTMLPaymentRequestElement = customElements.get('payment-request');
+		const req = new HTMLPaymentRequestElement(supportedInstruments, details, opts);
+
+		if (await req.canMakePayment()) {
+			return req;
+		} else {
+			throw new DOMException('No payment methods supported');
+		}
+	}
+}
+
 export async function submitPhoto(data) {
 	if (! (data instanceof FormData)) {
 		throw new TypeError('submitPhoto() only accepts FormData objects');
@@ -33,23 +69,6 @@ export async function submitPhoto(data) {
 }
 
 export async function derbyRegister({ adults = 1, children = 0 } = {}) {
-	const PayRequest = await new Promise(resolve => {
-		if ('PaymentRequest' in window) {
-			resolve(window.PaymentRequest);
-		} else {
-			Promise.all([
-				getCustomElement('payment-request'),
-				loadScript('https://cdn.kernvalley.us/components/payment/request.js', { type: 'module' }),
-				preload('https://cdn.kernvalley.us/components/payment/request.html', { as: 'fetch' }),
-				preload('https://cdn.kernvalley.us/components/payment/request.css', { as: 'style' }),
-			]).then(([HTMLPaymentRequestElement]) => {
-				console.log(HTMLPaymentRequestElement);
-				window.PaymentRequest = HTMLPaymentRequestElement;
-				resolve(HTMLPaymentRequestElement);
-			}).catch(console.error);
-		}
-	});
-
 	if (! (Number.isInteger(adults) && Number.isInteger(children))) {
 		throw new TypeError('Adults and children must be integers');
 	} else {
@@ -67,7 +86,7 @@ export async function derbyRegister({ adults = 1, children = 0 } = {}) {
 			}
 		}];
 
-		const req = new PayRequest(supportedInstruments, {
+		const req = await pay({
 			total: {
 				label: 'Registration Total',
 				amount: {
