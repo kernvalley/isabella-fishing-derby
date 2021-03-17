@@ -19,3 +19,6 @@
 [submodule "_includes/leaflet"]
 	path = _includes/leaflet
 	url = https://github.com/shgysk8zer0/jekyll-leaflet.git
+[submodule "_includes/ecommerce"]
+	path = _includes/ecommerce
+	url = https://github.com/shgysk8zer0/jekyll-ecommerce.git
