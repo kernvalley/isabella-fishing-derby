@@ -20,7 +20,7 @@ tags:
 <div class="status-box info">This part will take a while to build, and I'm not sure if it will be possible to connect to the current store without entirely replacing it.</div>
 <section id="product-gallery" class="grid">
 	{% for product in site.products %}
-		{% include ecom/product-listing.html product=product.product url=product.url %}
+		{% include ecommerce/product-listing.html product=product.product url=product.url %}
 	{% endfor %}
 </section>
 {% include common/share-buttons.html facebook=true twitter=true reddit=true linkedin=true %}
