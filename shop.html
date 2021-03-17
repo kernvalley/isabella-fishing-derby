@@ -6,6 +6,7 @@ pinned: true
 index: true
 #no-header: true
 referrer: no-referrer
+itemtype: https://schema.org/CollectionPage
 description: Browser avaialble merchandise and memorabilia for the Isabella Lake Fishing Derby
 tags:
   - events
@@ -18,7 +19,8 @@ tags:
   - merchandise
 ---
 <div class="status-box info">This part will take a while to build, and I'm not sure if it will be possible to connect to the current store without entirely replacing it.</div>
-<section id="product-gallery" class="grid">
+<section id="product-gallery" class="grid" itemprop="about" itemtype="https://schema.org/ItemList" itemscope="">
+	<meta itemprop="numberOfItems" content="{{ site.products.size }}" />
 	{% for product in site.products %}
 		{% include ecommerce/product-listing.html product=product.product url=product.url %}
 	{% endfor %}
