@@ -16,6 +16,8 @@ async function getRegistered({ adults, children }) {
 			const adultSection = document.getElementById('register-adult-section');
 			const childSection = document.getElementById('register-child-section');
 
+			childSection.hidden = children === 0;
+
 			const handlers = {
 				submit:  event => {
 					event.preventDefault();
