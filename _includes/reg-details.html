@@ -1,0 +1,49 @@
+
+<dialog id="registration-details-dialog">
+	<form id="registration-details" name="registration-details">
+		<fieldset id="register-adult-section" class="no-border">
+			<legend>Register Adults</legend>
+		</fieldset>
+		<fieldset id="register-child-section" class="no-border">
+			<legend>Register Children</legend>
+		</fieldset>
+		<div class="flex row space-evenly btns">
+			<button type="submit" class="btn btn-accept" title="Continue">
+				{% include common/icon.html icon="check" height="20" width="20" fill="currentColor" %}
+				<span>Continue</span>
+			</button>
+			<button type="reset" class="btn btn-reject" title="Cancel">
+				{% include common/icon.html icon="check" height="20" width="20" fill="currentColor" %}
+				<span>Cancel</span>
+			</button>
+		</div>
+	</form>
+</dialog>
+<template id="register-adult-template">
+	<div class="derby-reg-details adult form-group">
+		<label class="input-label required reg-name-label">
+			<span>Name</span>
+		</label>
+		<input type="text" class="reg-name-input adult input" name="reg[][name]" placeholder="First Last" autocomplete="off" required="" />
+	</div>
+	<div class="derby-reg-details adult form-group">
+		<label class="input-label required">
+			<span>Age</span>
+		</label>
+		<input type="number" class="reg-age-input adult input" name="reg[][age]" placeholder="##" min="14" autocomplete="off" required="" />
+	</div>
+</template>
+<template id="register-child-template">
+	<div class="derby-reg-details child form-group">
+		<label class="input-label required reg-name-label">
+			<span>Name</span>
+		</label>
+		<input type="text" class="reg-name-input child input" name="reg[][name]" placeholder="First Last" autocomplete="off" required="" />
+	</div>
+	<div class="derby-reg-details child form-group">
+		<label class="input-label required">
+			<span>Age</span>
+		</label>
+		<input type="number" class="reg-age-input child input" name="reg[][age]" placeholder="##" min="0" max="13" autocomplete="off" required="" />
+	</div>
+</template>
