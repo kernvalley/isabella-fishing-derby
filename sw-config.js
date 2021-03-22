@@ -35,9 +35,6 @@ const config = {
 		'https://cdn.kernvalley.us/components/weather/current.css',
 		'https://cdn.kernvalley.us/components/payment/request.css',
 
-		/* Data and JSON */
-		'/manifest.json',
-
 		/* `customElements`templates */
 		'https://cdn.kernvalley.us/components/toast-message.html',
 		'https://cdn.kernvalley.us/components/leaflet/map.html',
