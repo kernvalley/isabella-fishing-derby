@@ -11,7 +11,7 @@ const config = {
 		'{{ site.pages | where: "pinned", true | map: "url" | join: "', '" }}',
 		'{{ site.posts | where: "pinned", true | map: "url" | join: "', '" }}',
 		'{{ site.products | map: "url" | join: "', '" }}',
-		'/manifest.json',
+		'/webapp.webmanifest',
 		'https://apps.kernvalley.us/apps.json',
 	].map(path => new URL(path, location.origin).href),
 	stale: [
