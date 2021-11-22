@@ -63,7 +63,7 @@ if (typeof GA === 'string' && GA.length !== 0) {
 Promise.allSettled([
 	ready(),
 ]).then(async () => {
-	init().catch(console.error);
+	init();
 
 	customElements.whenDefined('install-prompt').then(() => {
 		const InstallPrompt = customElements.get('install-prompt');
