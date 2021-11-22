@@ -8,7 +8,7 @@ import 'https://cdn.kernvalley.us/components/notification/html-notification.js';
 import 'https://cdn.kernvalley.us/components/github/user.js';
 import 'https://cdn.kernvalley.us/components/current-year.js';
 import 'https://cdn.kernvalley.us/components/bacon-ipsum.js';
-import 'https://cdn.kernvalley.us/components/pwa/install.js';
+import 'https://cdn.kernvalley.us/components/install/prompt.js';
 import 'https://cdn.kernvalley.us/components/ad/block.js';
 import 'https://cdn.kernvalley.us/components/app/list-button.js';
 import 'https://cdn.kernvalley.us/components/app/stores.js';
@@ -64,6 +64,13 @@ Promise.allSettled([
 	ready(),
 ]).then(async () => {
 	init().catch(console.error);
+
+	customElements.whenDefined('install-prompt').then(() => {
+		const InstallPrompt = customElements.get('install-prompt');
+		const install = document.getElementById('install-btn');
+		install.addEventListener('click', () => new InstallPrompt().show());
+		install.hidden = false;
+	});
 
 	if (location.pathname.startsWith('/map')) {
 		loadScript('https://cdn.kernvalley.us/components/leaflet/map.min.js');

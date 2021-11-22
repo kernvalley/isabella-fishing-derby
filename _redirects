@@ -1,1 +1,2 @@
 #/.well-known/change-password	/forgot-password/	301!
+/manifest.json /webapp.webmanifest 301!
